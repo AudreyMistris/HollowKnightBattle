@@ -6,10 +6,10 @@
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cenário com sprites">
+    <meta name="description" content="Hollow Knight atirando em inimigos">
 
     <link rel="shortcut icon" href="hollowknight.png">
-    <title>Hollow Knight battle</title>
+    <title>Space Invaders versão Hollow Knight</title>
 
     <style>
         body {
@@ -25,23 +25,8 @@
             margin-left: auto;
             margin-right: auto;
             image-rendering: pixelated;
-            cursor: pointer;
+            cursor: none;
         }
-
-        /* button {
-            background-color: darkcyan;
-            border: none;
-            border-radius: 3px;
-            color: #000000;
-            padding: 2px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            font-weight: bold;
-            position: fixed;
-        } */
-
         .footer {
             position: fixed;
             text-align: center;
@@ -58,19 +43,12 @@
     <canvas id="jogo" width="700" height="280"></canvas>
     <div class="footer">Instruções: Clicar no canvas para atacar.</div>
 
-    <!-- <button id="atirar">Atacar</button>
-
-    <script>
-        let botaoEl = document.querySelector('#atirar');
-        botaoEl.addEventListener('click', function(e) {
-            alert('Atacou na posição x = ' + e.offsetX + '!!!');
-            // Desenhar quadrado na posição atacada aqui
-        });
-    </script> -->
-
     <script>
         document.body.style.backgroundColor = "black";
 
+        const LARGURA_JOGO = 700;
+        const ALTURA_JOGO = 280;
+        
         class Sprite {
             constructor(x, y, largura, altura, imagem) {
                 this.x = x;
@@ -88,6 +66,20 @@
                 } */
             }
         }
+        
+        class Inimigo extends Sprite {
+            constructor() {
+                super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 119, 114, imageInimigo);
+                this.velocidadeX = Math.random() * Math.PI + 1;
+            }
+        }
+
+        class Tiro extends Sprite {
+            constructor(hollowKnight) {
+                super(hollowKnight.x, hollowKnight.y, 10, 10);
+                this.velocidadeX = Math.random() * Math.PI + 1;
+            }
+        }
 
         let canvasEl = document.querySelector('#jogo');
         let ctx = canvasEl.getContext('2d');
@@ -99,13 +91,6 @@
         let imageInimigo = new Image();
         imageInimigo.src = 'hk3.png';
 
-        /* imageSprite.onload = () => {
-            ctx.drawImage(imageSprite, 50, 50);
-        }; */
-
-        /* let x = 50;
-        let y = 50; */
-
         let hollowKnight = new Sprite(50, 133, 120, 160, imageSprite);
         let inimigos = [];
 
@@ -114,7 +99,6 @@
         inimigos.push(new Sprite(570, 50, 119, 114, imageInimigo));
 
         imageSprite.addEventListener('load', (evento) => {
-            // ctx.drawImage(imageSprite, x, y, 80, 90);
             desenhaJogo();
         });
 
@@ -122,8 +106,6 @@
             // alert('x = ' + evento.offsetX);
             hollowKnight.x = evento.offsetX - hollowKnight.largura / 2;
             hollowKnight.y = evento.offsetY - hollowKnight.altura / 2;
-            // ctx.clearRect(0, 0, 700, 280);
-            // ctx.drawImage(imageSprite, x, y, 80, 90);
             desenhaJogo();
         });
 
@@ -138,17 +120,12 @@
             ctx.clearRect(0, 0, 700, 280);
             hollowKnight.desenha(ctx);
 
-            /* for (let i = 0; i < inimigos.length; i++) {
-                inimigos[i].desenha(ctx);
-            } */
-
             for (let inimigo of inimigos) {
                 inimigo.desenha(ctx);
             }
 
             // inimigos.forEach(inimigo => inimigo.desenha(ctx));
         }
-
     </script>
 </body>
 
