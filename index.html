@@ -41,7 +41,7 @@
 
 <body>
     <canvas id="jogo" width="700" height="280"></canvas>
-    <div class="footer">Instruções: Clicar no canvas para atacar.</div>
+    <div class="footer">Instruções: Apertar em [Espaço] para atacar.</div>
 
     <script>
         document.body.style.backgroundColor = "black";
@@ -72,12 +72,29 @@
                 super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 119, 114, imageInimigo);
                 this.velocidadeX = Math.random() * Math.PI + 1;
             }
+            
+            atualizar() {
+                this.x += this.velocidadeXinimigo;
+
+                if (this.x + this.largura < 0) {
+                    this.x = LARGURA_JOGO;
+                    this.y = Math.random() * ALTURA_JOGO;
+                }
+            }
         }
 
         class Tiro extends Sprite {
             constructor(hollowKnight) {
                 super(hollowKnight.x, hollowKnight.y, 10, 10);
                 this.velocidadeX = Math.random() * Math.PI + 1;
+            }
+            
+            atualizar() {
+                this.x += velocidadeXtiro;
+
+                if (this.x > LARGURA_JOGO) {
+                    this.destroy = true;
+                }
             }
         }
 
@@ -92,6 +109,7 @@
         imageInimigo.src = 'hk3.png';
 
         let hollowKnight = new Sprite(50, 133, 120, 160, imageSprite);
+        let tiros = [];
         let inimigos = [];
 
         inimigos.push(new Sprite(450, 20, 119, 114, imageInimigo));
@@ -115,9 +133,15 @@
             ctx.fillStyle = 'red';
             ctx.fillRect(Math.random() * 700, Math.random() * 280, 10, 10);
         }); */
+        
+        document.body.addEventListener('keydown', (evento) => {
+            if(evento.key == ' ') {
+                darTiro();
+            }
+        });
 
         function desenhaJogo() {
-            ctx.clearRect(0, 0, 700, 280);
+            ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
             hollowKnight.desenha(ctx);
 
             for (let inimigo of inimigos) {
@@ -125,6 +149,27 @@
             }
 
             // inimigos.forEach(inimigo => inimigo.desenha(ctx));
+            
+            for (let tiro of tiros) {
+                tiro.desenha(ctx);
+            }
+        }
+        
+        function darTiro(){
+            let tiro = new Tiro(hollowKnight);
+            tiros.push(tiro);
+        }
+        
+        function atualizarInimigos() {
+            for (let inimigo of inimigos) {
+                inimigo.atualizar();
+            }
+        }
+        
+        function atualizarTiros() {
+            for (let tiro of tiros) {
+                tiro.atualizar();
+            }
         }
     </script>
 </body>
