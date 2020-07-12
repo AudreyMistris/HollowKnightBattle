@@ -9,7 +9,7 @@
     <meta name="description" content="Hollow Knight atirando em inimigos">
 
     <link rel="shortcut icon" href="hollowknight.png">
-    <title>Space Invaders versão Hollow Knight</title>
+    <title>Hollow Invaders Knight</title>
 
     <style>
         body {
@@ -109,12 +109,12 @@
             desenhaJogo();
         });
 
-        canvasEl.addEventListener('click', (evento) => {
+        /* canvasEl.addEventListener('click', (evento) => {
             // alert('Atacou na posição x = ' + evento.offsetX + '!!!');
             ctx.strokeStyle = 'red';
             ctx.fillStyle = 'red';
             ctx.fillRect(Math.random() * 700, Math.random() * 280, 10, 10);
-        });
+        }); */
 
         function desenhaJogo() {
             ctx.clearRect(0, 0, 700, 280);
