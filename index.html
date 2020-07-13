@@ -70,7 +70,7 @@
         class Inimigo extends Sprite {
             constructor() {
                 super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 119, 114, imageInimigo);
-                this.velocidadeX = Math.random() * Math.PI + 1;
+                this.velocidadeXinimigo = Math.random() * Math.PI + 1;
             }
             
             atualizar() {
@@ -86,7 +86,7 @@
         class Tiro extends Sprite {
             constructor(hollowKnight) {
                 super(hollowKnight.x, hollowKnight.y, 10, 10);
-                this.velocidadeX = Math.random() * Math.PI + 1;
+                this.velocidadeXtiro = Math.random() * Math.PI + 2;
             }
             
             atualizar() {
@@ -105,26 +105,27 @@
         let imageSprite = new Image();
         imageSprite.src = 'hollowk.png';
 
-        let imageInimigo = new Image();
-        imageInimigo.src = 'hk3.png';
+        // let imageInimigo = new Image();
+        // imageInimigo.src = 'hk3.png';
 
         let hollowKnight = new Sprite(50, 133, 120, 160, imageSprite);
-        let tiros = [];
         let inimigos = [];
+        let tiros = [];
 
-        inimigos.push(new Sprite(450, 20, 119, 114, imageInimigo));
-        inimigos.push(new Sprite(500, 160, 119, 114, imageInimigo));
-        inimigos.push(new Sprite(570, 50, 119, 114, imageInimigo));
+        // inimigos.push(new Sprite(450, 20, 119, 114, imageInimigo));
+        inimigos.push(new Inimigo);
+        inimigos.push(new Inimigo);
+        inimigos.push(new Inimigo);
 
         imageSprite.addEventListener('load', (evento) => {
-            desenhaJogo();
+            desenharJogo();
         });
 
         canvasEl.addEventListener('mousemove', (evento) => {
             // alert('x = ' + evento.offsetX);
             hollowKnight.x = evento.offsetX - hollowKnight.largura / 2;
             hollowKnight.y = evento.offsetY - hollowKnight.altura / 2;
-            desenhaJogo();
+            // desenharJogo();
         });
 
         /* canvasEl.addEventListener('click', (evento) => {
@@ -140,7 +141,7 @@
             }
         });
 
-        function desenhaJogo() {
+        function desenharJogo() {
             ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
             hollowKnight.desenha(ctx);
 
@@ -159,6 +160,15 @@
             let tiro = new Tiro(hollowKnight);
             tiros.push(tiro);
         }
+        
+        function atualizarJogo() {
+            atualizarInimigos();
+            atualizarTiros();
+
+            desenharJogo();
+        }
+
+        setInterval(atualizarJogo, 33);
         
         function atualizarInimigos() {
             for (let inimigo of inimigos) {
