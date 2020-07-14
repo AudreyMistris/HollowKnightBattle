@@ -62,21 +62,30 @@
             desenha(ctx) {
                 if (this.imagem) {
                     ctx.drawImage(this.imagem, this.x, this.y, this.largura, this.altura);
-                } /* else { tem que colocar isso ainda?
+                } else { // tem que colocar isso ainda?
                     ctx.strokeRect(this.x, this.y, this.largura, this.altura);
-                } */
+                }
             }
         }
         
         class Inimigo extends Sprite {
             constructor() {
-                
+                super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 89, 86, imageInimigo);
+                this.velocidadeX = - 1;
+            }
+            
+            desenhar(ctx) {
+                ctx.strokeRect(this.x, this.y, this.largura, this.altura);
+            }
+
+            atualizar() {
+                this.x += this.velocidadeX;
             }
         }
         
         class Tiro extends Sprite {
             constructor() {
-                
+
             }
         }
 
@@ -86,13 +95,11 @@
 
         let imageSprite = new Image();
         imageSprite.src = 'hollowk.png';
-
+        let hollowKnight = new Sprite(50, 133, 50, 94, imageSprite);
+        
         let imageInimigo = new Image();
         imageInimigo.src = 'hk3.png';
-
-        let hollowKnight = new Sprite(50, 133, 50, 94, imageSprite);
         let inimigos = [];
-
         inimigos.push(new Inimigo(450, 20, 103, 103, imageInimigo));
         inimigos.push(new Inimigo(500, 160, 103, 103, imageInimigo));
         inimigos.push(new Inimigo(570, 50, 103, 103, imageInimigo));
