@@ -68,12 +68,16 @@
             }
         }
         
-        class Inimigo {
-        
+        class Inimigo extends Sprite {
+            constructor() {
+                
+            }
         }
         
-        class Tiro {
-            
+        class Tiro extends Sprite {
+            constructor() {
+                
+            }
         }
 
         let canvasEl = document.querySelector('#jogo');
@@ -89,9 +93,9 @@
         let hollowKnight = new Sprite(50, 133, 50, 94, imageSprite);
         let inimigos = [];
 
-        inimigos.push(new Sprite(450, 20, 103, 103, imageInimigo));
-        inimigos.push(new Sprite(500, 160, 103, 103, imageInimigo));
-        inimigos.push(new Sprite(570, 50, 103, 103, imageInimigo));
+        inimigos.push(new Inimigo(450, 20, 103, 103, imageInimigo));
+        inimigos.push(new Inimigo(500, 160, 103, 103, imageInimigo));
+        inimigos.push(new Inimigo(570, 50, 103, 103, imageInimigo));
 
         imageSprite.addEventListener('load', (evento) => {
             desenhaJogo();
