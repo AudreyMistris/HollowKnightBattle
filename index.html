@@ -46,6 +46,9 @@
 
     <script>
         document.body.style.backgroundColor = "black";
+        
+        const LARGURA_JOGO = 700;
+        const ALTURA_JOGO = 280;
 
         class Sprite {
             constructor(x, y, largura, altura, imagem) {
@@ -63,6 +66,14 @@
                     ctx.strokeRect(this.x, this.y, this.largura, this.altura);
                 } */
             }
+        }
+        
+        class Inimigo {
+        
+        }
+        
+        class Tiro {
+            
         }
 
         let canvasEl = document.querySelector('#jogo');
@@ -95,13 +106,12 @@
 
         canvasEl.addEventListener('click', (evento) => {
             // alert('Atacou na posição x = ' + evento.offsetX + '!!!');
-            ctx.strokeStyle = 'red';
             ctx.fillStyle = 'red';
-            ctx.fillRect(Math.random() * 700, Math.random() * 280, 10, 10);
+            ctx.fillRect(Math.random() * LARGURA_JOGO, Math.random() * ALTURA_JOGO, 10, 10);
         });
 
         function desenhaJogo() {
-            ctx.clearRect(0, 0, 700, 280);
+            ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
             hollowKnight.desenha(ctx);
 
             for (let inimigo of inimigos) {
