@@ -47,6 +47,12 @@
     <script>
         document.body.style.backgroundColor = "black";
         
+        // Se o áudio não funcionar automaticamente, fazer "right click" > "Atualizar frame"
+        const BGM = new Audio('enter-hallownest.mp3');
+        BGM.load();
+        BGM.play();
+        BGM.loop = true;
+        
         const LARGURA_JOGO = 700;
         const ALTURA_JOGO = 280;
 
@@ -123,6 +129,10 @@
             
             atualizar() {
                 this.x += this.velocidadeX;
+                
+                if (this.x > LARGURA_JOGO) {
+                    this.podeSerDestruido = true;
+                }
             }
         }
 
