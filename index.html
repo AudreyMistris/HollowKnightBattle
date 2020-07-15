@@ -70,9 +70,9 @@
         
         class Inimigo extends Sprite {
             constructor() {
-                super(LARGURA_JOGO, Math.random() * ALTURA_JOGO - 94, 89, 86, imageInimigo);
+                super(LARGURA_JOGO, Math.random() * (ALTURA_JOGO - 77), 77, 77, imageInimigo);
                 this.velocidadeX = -2 * Math.random() - 3;
-                this.baseY = Math.random(ALTURA_JOGO - 94) * 200;
+                this.baseY = Math.random() * (ALTURA_JOGO - 77);
             }
             
             /* desenhar(ctx) {
@@ -85,7 +85,7 @@
                 
                 if (this.x  + this.largura < 0) {
                     this.x = LARGURA_JOGO;
-                    this.baseY = Math.random(ALTURA_JOGO - 94) * 200;
+                    this.baseY = Math.random() * (ALTURA_JOGO - 77);
                 }
             }
         }
@@ -107,9 +107,9 @@
         let imageInimigo = new Image();
         imageInimigo.src = 'hk3.png';
         let inimigos = [];
-        inimigos.push(new Inimigo(450, 20, 103, 103, imageInimigo));
-        inimigos.push(new Inimigo(500, 160, 103, 103, imageInimigo));
-        inimigos.push(new Inimigo(570, 50, 103, 103, imageInimigo));
+        inimigos.push(new Inimigo(imageInimigo));
+        inimigos.push(new Inimigo(imageInimigo));
+        inimigos.push(new Inimigo(imageInimigo));
 
         imageSprite.addEventListener('load', (evento) => {
             desenhaJogo();
