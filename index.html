@@ -66,6 +66,24 @@
                     ctx.strokeRect(this.x, this.y, this.largura, this.altura);
                 }
             }
+            
+            get centro() {
+                return {
+                    x: this.x + this.largura / 2,
+                    y: this.y + this.altura / 2
+                };
+            }
+            
+            colidiu(otherSprite) {
+                let a = Math.abs(otherSprite.centro.x - this.centro.x);
+                let b = Math.abs(otherSprite.centro.y - this.centro.y);
+                let d = Math.sqrt(a ** 2 + b ** 2);
+                let r1 = this.altura / 2;
+                let r2 = otherSprite.altura / 2;
+
+                return d <= r1 + r2;
+                // return false;
+            }
         }
         
         class Inimigo extends Sprite {
@@ -87,6 +105,12 @@
                     this.x = LARGURA_JOGO;
                     this.baseY = Math.random() * (ALTURA_JOGO - 77);
                 }
+            }
+            
+            destruir() {
+                this.x = LARGURA_JOGO;
+                this.y = Math.random() * (ALTURA_JOGO - 77);
+                // this.y = this.baseY + Math.cos(this.x / 174) * 35; //try this later
             }
         }
         
@@ -136,7 +160,6 @@
             for (let inimigo of inimigos) {
                 inimigo.desenhar(ctx);
             }
-
             // inimigos.forEach(inimigo => inimigo.desenhar(ctx));
         }
         
@@ -144,9 +167,19 @@
             for (let inimigo of inimigos) {
                 inimigo.atualizar();
             }
+            
+            for (let inimigo of inimigos) {
+                const HIT_SPRITE = inimigo.colidiu(hollowKnight);
+                inimigo.destruir();
+
+                if (HIT_SPRITE) {
+                    inimigo.destruir();
+                    alert('Jogador atingido!');
+                }
+            }
+            
             desenhaJogo();
         }, 33);
-
     </script>
 </body>
 
