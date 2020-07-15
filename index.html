@@ -42,7 +42,7 @@
 
 <body>
     <canvas id="jogo" width="700" height="280"></canvas>
-    <div class="footer">Instruções: Clicar no canvas para atacar.</div>
+    <div class="footer">Instruções: [Editar aqui] para atacar.</div>
 
     <script>
         document.body.style.backgroundColor = "black";
@@ -59,7 +59,7 @@
                 this.imagem = imagem;
             }
 
-            desenha(ctx) {
+            desenhar(ctx) {
                 if (this.imagem) {
                     ctx.drawImage(this.imagem, this.x, this.y, this.largura, this.altura);
                 } else { // tem que colocar isso ainda?
@@ -112,24 +112,25 @@
             // alert('x = ' + evento.offsetX);
             hollowKnight.x = evento.offsetX - hollowKnight.largura / 2;
             hollowKnight.y = evento.offsetY - hollowKnight.altura / 2;
+            
             desenhaJogo();
         });
 
-        canvasEl.addEventListener('click', (evento) => {
+        /* canvasEl.addEventListener('click', (evento) => {
             // alert('Atacou na posição x = ' + evento.offsetX + '!!!');
             ctx.fillStyle = 'red';
             ctx.fillRect(Math.random() * LARGURA_JOGO, Math.random() * ALTURA_JOGO, 10, 10);
-        });
+        }); */
 
         function desenhaJogo() {
             ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
-            hollowKnight.desenha(ctx);
+            hollowKnight.desenhar(ctx);
 
             for (let inimigo of inimigos) {
-                inimigo.desenha(ctx);
+                inimigo.desenhar(ctx);
             }
 
-            // inimigos.forEach(inimigo => inimigo.desenha(ctx));
+            // inimigos.forEach(inimigo => inimigo.desenhar(ctx));
         }
 
     </script>
