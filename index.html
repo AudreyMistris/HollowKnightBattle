@@ -90,7 +90,7 @@
         class Inimigo extends Sprite {
             constructor() {
                 super(LARGURA_JOGO, Math.random() * (ALTURA_JOGO - 77), 77, 77, imageInimigo);
-                this.velocidadeX = -2 * Math.random() - 3;
+                this.velocidadeX = -2 * Math.random() * Math.sin(this.x) - 3;
                 this.baseY = Math.random() * (ALTURA_JOGO - 77);
             }
             
@@ -184,19 +184,8 @@
         }
         
         setInterval(() => {
-            for (let inimigo of inimigos) {
-                inimigo.atualizar();
-            }
-            
-            for (let tiro of tiros) {
-                tiro.atualizar();
-            }
-
-            for (let i = 0; i < tiros.length; i++) {
-                if (tiros[i].podeSerDestruido) {
-                    tiros.splice(i, 1);
-                }
-            }
+            atualizarInimigos();
+            atualizarTiros();
             
             for (let inimigo of inimigos) {
                 const HIT_SPRITE = inimigo.colidiu(hollowKnight);
@@ -213,6 +202,24 @@
         function darTiro() {
             let tiro = new Tiro(hollowKnight);
             tiros.push(tiro);
+        }
+        
+        function atualizarInimigos() {
+            for (let inimigo of inimigos) {
+                inimigo.atualizar();
+            }
+        }
+        
+        function atualizarTiros() {
+            for (let tiro of tiros) {
+                tiro.atualizar();
+            }
+
+            for (let i = 0; i < tiros.length; i++) {
+                if (tiros[i].podeSerDestruido) {
+                    tiros.splice(i, 1);
+                }
+            }
         }
     </script>
 </body>
