@@ -70,8 +70,9 @@
         
         class Inimigo extends Sprite {
             constructor() {
-                super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 89, 86, imageInimigo);
+                super(LARGURA_JOGO, Math.random() * ALTURA_JOGO - 94, 89, 86, imageInimigo);
                 this.velocidadeX = -2 * Math.random() - 3;
+                this.baseY = Math.random(ALTURA_JOGO - 94) * 200;
             }
             
             /* desenhar(ctx) {
@@ -80,9 +81,11 @@
 
             atualizar() {
                 this.x += this.velocidadeX;
+                this.y = this.baseY + Math.cos(this.x / 174) * 35;
                 
                 if (this.x  + this.largura < 0) {
                     this.x = LARGURA_JOGO;
+                    this.baseY = Math.random(ALTURA_JOGO - 94) * 200;
                 }
             }
         }
