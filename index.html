@@ -225,6 +225,16 @@
                     // alert('Jogador atingido!');
                 }
             }
+            
+            for (let inimigo of inimigos) {
+                for (let tiro of tiros) {
+                    const HIT_ENEMY = tiro.colidiu(inimigo);
+                    if (HIT_ENEMY) {
+                        tiro.podeSerDestruido = true;
+                        inimigo.destruir();
+                    }
+                }
+            }
         }
     </script>
 </body>
