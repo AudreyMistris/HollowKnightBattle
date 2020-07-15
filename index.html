@@ -98,16 +98,12 @@
             constructor() {
                 super(LARGURA_JOGO, Math.random() * (ALTURA_JOGO - 77), 77, 77, imageInimigo);
                 this.velocidadeX = -2 * Math.random() * Math.sin(this.x) - 3;
-                this.baseY = Math.random() * (ALTURA_JOGO - 77);
+                /* this.baseY = Math.random() * (ALTURA_JOGO - 77); */
             }
-            
-            /* desenhar(ctx) {
-                ctx.strokeRect(this.x, this.y, this.largura, this.altura);
-            } */
 
             atualizar() {
                 this.x += this.velocidadeX;
-                this.y = this.baseY + Math.cos(this.x / 174) * 35;
+                /* this.y = this.baseY + Math.cos(this.x / 174) * 35; */
                 
                 if (this.x  + this.largura < 0) {
                     this.x = LARGURA_JOGO;
@@ -124,8 +120,8 @@
         
         class Tiro extends Sprite {
             constructor() {
-                super(hollowKnight.centro.x, hollowKnight.centro.y, 10, 10);
-                this.velocidadeX = 7;
+                super(hollowKnight.centro.x, hollowKnight.centro.y, 7, 7);
+                this.velocidadeX = 10;
             }
             
             atualizar() {
@@ -202,7 +198,7 @@
             desenharJogo();
         }
         
-        setInterval(atualizarJogo, 33);
+        setInterval(atualizarJogo, 30);
         
         function darTiro() {
             let tiro = new Tiro(hollowKnight);
@@ -240,6 +236,7 @@
             for (let inimigo of inimigos) {
                 for (let tiro of tiros) {
                     const HIT_ENEMY = tiro.colidiu(inimigo);
+                    
                     if (HIT_ENEMY) {
                         tiro.podeSerDestruido = true;
                         inimigo.destruir();
