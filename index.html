@@ -49,8 +49,7 @@
         
         // Se o áudio não funcionar automaticamente, fazer (fora do canvas) "right click" > "Atualizar frame"
         const BGM = new Audio('enter-hallownest.mp3');
-        // BGM.load();
-        BGM.preload = 'auto';
+        BGM.load();
         BGM.play();
         BGM.volume = 0.3;
         BGM.loop = true;
@@ -118,14 +117,14 @@
                 // this.y = this.baseY + Math.cos(this.x / 174) * 35; //try this later
                 
                 const HIT_SOUND = new Audio();
-                HIT_SOUND.src = 'explosion.wav';
+                HIT_SOUND.src = 'hurt.wav';
                 HIT_SOUND.preload = 'auto';
                 HIT_SOUND.play();
             }
         }
         
         class Tiro extends Sprite {
-            constructor() {
+            constructor(hollowKnight) {
                 super(hollowKnight.centro.x, hollowKnight.centro.y, 7, 7);
                 this.velocidadeX = 10;
             }
@@ -155,6 +154,7 @@
         inimigos.push(new Inimigo(imageInimigo));
         
         let tiros = [];
+        let life = 5;
 
         imageSprite.addEventListener('load', (evento) => {
             desenharJogo();
@@ -175,12 +175,6 @@
                 evento.preventDefault();
             }
         });
-
-        /* canvasEl.addEventListener('click', (evento) => {
-            // alert('Atacou na posição x = ' + evento.offsetX + '!!!');
-            ctx.fillStyle = 'red';
-            ctx.fillRect(Math.random() * LARGURA_JOGO, Math.random() * ALTURA_JOGO, 10, 10);
-        }); */
 
         function desenharJogo() {
             ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
@@ -236,6 +230,12 @@
                 if (HIT_SPRITE) {
                     inimigo.destruir();
                     // alert('Jogador atingido!');
+                    
+                    life--;
+                    if (life < 1) {
+                        alert('Game over! Tente novamente!')
+                        life = 5;
+                    }
                 }
             }
             
