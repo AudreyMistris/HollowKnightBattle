@@ -42,7 +42,7 @@
 
 <body>
     <canvas id="jogo" width="700" height="280"></canvas>
-    <div class="footer">Instruções: [Editar aqui] para atacar.</div>
+    <div class="footer">Instruções: Apertar em [Espaço] para atacar.</div>
 
     <script>
         document.body.style.backgroundColor = "black";
@@ -62,7 +62,7 @@
             desenhar(ctx) {
                 if (this.imagem) {
                     ctx.drawImage(this.imagem, this.x, this.y, this.largura, this.altura);
-                } else { // tem que colocar isso ainda?
+                } else { // tem que colocar isso ainda? Sim, para a bala aparecer
                     ctx.strokeRect(this.x, this.y, this.largura, this.altura);
                 }
             }
@@ -140,6 +140,8 @@
         inimigos.push(new Inimigo(imageInimigo));
         inimigos.push(new Inimigo(imageInimigo));
         inimigos.push(new Inimigo(imageInimigo));
+        
+        let tiros = [];
 
         imageSprite.addEventListener('load', (evento) => {
             desenharJogo();
@@ -156,6 +158,7 @@
         document.body.addEventListener('keydown', (evento) => {
             if (evento.key === ' ') {
                 // alert('Apertou em espaço!');
+                darTiro();
                 evento.preventDefault();
             }
         });
@@ -174,6 +177,10 @@
                 inimigo.desenhar(ctx);
             }
             // inimigos.forEach(inimigo => inimigo.desenhar(ctx));
+            
+            for (let tiro of tiros) {
+                tiro.desenhar(ctx);
+            }
         }
         
         setInterval(() => {
@@ -181,17 +188,32 @@
                 inimigo.atualizar();
             }
             
+            for (let tiro of tiros) {
+                tiro.atualizar();
+            }
+
+            for (let i = 0; i < tiros.length; i++) {
+                if (tiros[i].podeSerDestruido) {
+                    tiros.splice(i, 1);
+                }
+            }
+            
             for (let inimigo of inimigos) {
                 const HIT_SPRITE = inimigo.colidiu(hollowKnight);
 
                 if (HIT_SPRITE) {
                     inimigo.destruir();
-                    /* alert('Jogador atingido!'); */
+                    // alert('Jogador atingido!');
                 }
             }
             
             desenharJogo();
         }, 33);
+        
+        function darTiro() {
+            let tiro = new Tiro(hollowKnight);
+            tiros.push(tiro);
+        }
     </script>
 </body>
 
