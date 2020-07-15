@@ -103,7 +103,7 @@
                 
                 if (this.x  + this.largura < 0) {
                     this.x = LARGURA_JOGO;
-                    this.baseY = Math.random() * (ALTURA_JOGO - 77);
+                    this.y = Math.random() * (ALTURA_JOGO - 77);
                 }
             }
             
@@ -136,7 +136,7 @@
         inimigos.push(new Inimigo(imageInimigo));
 
         imageSprite.addEventListener('load', (evento) => {
-            desenhaJogo();
+            desenharJogo();
         });
 
         canvasEl.addEventListener('mousemove', (evento) => {
@@ -144,7 +144,7 @@
             hollowKnight.x = evento.offsetX - hollowKnight.largura / 2;
             hollowKnight.y = evento.offsetY - hollowKnight.altura / 2;
             
-            //desenhaJogo();
+            //desenharJogo();
         });
 
         /* canvasEl.addEventListener('click', (evento) => {
@@ -153,7 +153,7 @@
             ctx.fillRect(Math.random() * LARGURA_JOGO, Math.random() * ALTURA_JOGO, 10, 10);
         }); */
 
-        function desenhaJogo() {
+        function desenharJogo() {
             ctx.clearRect(0, 0, LARGURA_JOGO, ALTURA_JOGO);
             hollowKnight.desenhar(ctx);
 
@@ -178,7 +178,7 @@
                 }
             }
             
-            desenhaJogo();
+            desenharJogo();
         }, 33);
     </script>
 </body>
