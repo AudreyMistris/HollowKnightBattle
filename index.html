@@ -183,21 +183,15 @@
             }
         }
         
-        setInterval(() => {
+        function atualizarJogo() {
             atualizarInimigos();
             atualizarTiros();
-            
-            for (let inimigo of inimigos) {
-                const HIT_SPRITE = inimigo.colidiu(hollowKnight);
-
-                if (HIT_SPRITE) {
-                    inimigo.destruir();
-                    // alert('Jogador atingido!');
-                }
-            }
+            verificarColisoes();
             
             desenharJogo();
-        }, 33);
+        }
+        
+        setInterval(atualizarJogo, 33);
         
         function darTiro() {
             let tiro = new Tiro(hollowKnight);
@@ -218,6 +212,17 @@
             for (let i = 0; i < tiros.length; i++) {
                 if (tiros[i].podeSerDestruido) {
                     tiros.splice(i, 1);
+                }
+            }
+        }
+        
+        function verificarColisoes() {
+            for (let inimigo of inimigos) {
+                const HIT_SPRITE = inimigo.colidiu(hollowKnight);
+
+                if (HIT_SPRITE) {
+                    inimigo.destruir();
+                    // alert('Jogador atingido!');
                 }
             }
         }
