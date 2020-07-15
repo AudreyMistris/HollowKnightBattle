@@ -71,15 +71,19 @@
         class Inimigo extends Sprite {
             constructor() {
                 super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 89, 86, imageInimigo);
-                this.velocidadeX = - 1;
+                this.velocidadeX = - 3;
             }
             
-            desenhar(ctx) {
+            /* desenhar(ctx) {
                 ctx.strokeRect(this.x, this.y, this.largura, this.altura);
-            }
+            } */
 
             atualizar() {
                 this.x += this.velocidadeX;
+                
+                if (this.x < 0) {
+                    this.x = LARGURA_JOGO;
+                }
             }
         }
         
@@ -113,7 +117,7 @@
             hollowKnight.x = evento.offsetX - hollowKnight.largura / 2;
             hollowKnight.y = evento.offsetY - hollowKnight.altura / 2;
             
-            desenhaJogo();
+            //desenhaJogo();
         });
 
         /* canvasEl.addEventListener('click', (evento) => {
@@ -132,6 +136,13 @@
 
             // inimigos.forEach(inimigo => inimigo.desenhar(ctx));
         }
+        
+        setInterval(() => {
+            for (let meteoro of meteoros) {
+                meteoro.atualizar();
+            }
+            desenhaJogo();
+        }, 33);
 
     </script>
 </body>
