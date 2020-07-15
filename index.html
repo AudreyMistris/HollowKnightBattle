@@ -71,7 +71,7 @@
         class Inimigo extends Sprite {
             constructor() {
                 super(LARGURA_JOGO, Math.random() * ALTURA_JOGO, 89, 86, imageInimigo);
-                this.velocidadeX = - 3;
+                this.velocidadeX = -2 * Math.random() - 3;
             }
             
             /* desenhar(ctx) {
@@ -81,7 +81,7 @@
             atualizar() {
                 this.x += this.velocidadeX;
                 
-                if (this.x < 0) {
+                if (this.x  + this.largura < 0) {
                     this.x = LARGURA_JOGO;
                 }
             }
@@ -99,7 +99,7 @@
 
         let imageSprite = new Image();
         imageSprite.src = 'hollowk.png';
-        let hollowKnight = new Sprite(50, 133, 50, 94, imageSprite);
+        let hollowKnight = new Sprite(50, 185, 50, 94, imageSprite);
         
         let imageInimigo = new Image();
         imageInimigo.src = 'hk3.png';
@@ -138,8 +138,8 @@
         }
         
         setInterval(() => {
-            for (let meteoro of meteoros) {
-                meteoro.atualizar();
+            for (let inimigo of inimigos) {
+                inimigo.atualizar();
             }
             desenhaJogo();
         }, 33);
