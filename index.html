@@ -188,6 +188,9 @@
             for (let tiro of tiros) {
                 tiro.desenhar(ctx);
             }
+            
+            ctx.fillText(life + ' vida(s)', 10, 15);
+            // ctx.fillText(`${life} vida(s)`, 10, 15);
         }
         
         function atualizarJogo() {
