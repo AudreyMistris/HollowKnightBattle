@@ -117,7 +117,12 @@
         
         class Tiro extends Sprite {
             constructor() {
-
+                super(hollowKnight.centro.x, hollowKnight.centro.y, 10, 10);
+                this.velocidadeX = 7;
+            }
+            
+            atualizar() {
+                this.x += this.velocidadeX;
             }
         }
 
@@ -150,7 +155,7 @@
         
         document.body.addEventListener('keydown', (evento) => {
             if (evento.key === ' ') {
-                alert('Apertou em espaço!');
+                // alert('Apertou em espaço!');
                 evento.preventDefault();
             }
         });
@@ -181,7 +186,7 @@
 
                 if (HIT_SPRITE) {
                     inimigo.destruir();
-                    // alert('Jogador atingido!');
+                    /* alert('Jogador atingido!'); */
                 }
             }
             
