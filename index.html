@@ -78,6 +78,7 @@
                 let a = Math.abs(otherSprite.centro.x - this.centro.x);
                 let b = Math.abs(otherSprite.centro.y - this.centro.y);
                 let d = Math.sqrt(a ** 2 + b ** 2);
+                
                 let r1 = this.altura / 2;
                 let r2 = otherSprite.altura / 2;
 
@@ -146,6 +147,12 @@
             
             //desenharJogo();
         });
+        
+        document.body.addEventListener('keydown', (evento) => {
+            if (evento.key === ' ') {
+                alert('Apertou em espaço!');
+            }
+        });
 
         /* canvasEl.addEventListener('click', (evento) => {
             // alert('Atacou na posição x = ' + evento.offsetX + '!!!');
@@ -170,7 +177,6 @@
             
             for (let inimigo of inimigos) {
                 const HIT_SPRITE = inimigo.colidiu(hollowKnight);
-                inimigo.destruir();
 
                 if (HIT_SPRITE) {
                     inimigo.destruir();
