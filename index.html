@@ -47,10 +47,11 @@
     <script>
         document.body.style.backgroundColor = "black";
         
-        // Se o áudio não funcionar automaticamente, fazer "right click" > "Atualizar frame"
+        // Se o áudio não funcionar automaticamente, fazer (fora do canvas) "right click" > "Atualizar frame"
         const BGM = new Audio('enter-hallownest.mp3');
         BGM.load();
         BGM.play();
+        BGM.volume = 0.3;
         BGM.loop = true;
         
         const LARGURA_JOGO = 700;
